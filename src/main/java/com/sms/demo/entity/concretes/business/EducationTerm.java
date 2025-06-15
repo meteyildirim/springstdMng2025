@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,4 +36,7 @@ public class EducationTerm {
     @Column(name="last_registration_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM--dd")
     private  LocalDate lastRegistrationDate;
+
+    @OneToMany(mappedBy = "educationTerm", cascade = CascadeType.ALL)
+    private List<LessonProgram> lessonProgram;
 }
