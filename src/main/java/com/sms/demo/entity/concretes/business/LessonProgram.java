@@ -1,5 +1,6 @@
 package com.sms.demo.entity.concretes.business;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sms.demo.entity.concretes.users.User;
 import com.sms.demo.entity.enums.Day;
@@ -24,11 +25,13 @@ public class LessonProgram {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(EnumType.STRING)
     private Day day;
 
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="HH:mm", timezone = "US")
     private LocalDate startTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="HH:mm", timezone = "US")
     private LocalDate stopTime;
 
     @ManyToMany
@@ -43,10 +46,12 @@ public class LessonProgram {
     private  EducationTerm educationTerm;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "lessonProgramSet", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "lessonProgramList", fetch = FetchType.EAGER)
     private Set<User> users;
 
+    @PreRemove
     private void removeLessonsFromUser(){
+        users.forEach( user -> user.getLessonProgramList().remove(this));
 
     }
 

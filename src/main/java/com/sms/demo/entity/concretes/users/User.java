@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -24,22 +25,32 @@ import java.util.Set;
 @Builder
 @Table(name = "t_user") //
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(unique = true)
     private String username;
+
     @Column(unique = true)
     private String ssn;
+
     private String name;
+
     private String surname;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthday;
+
     private String birthplace;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
     @Column(unique = true)
     private String phoneNumber;
+
     @Column(unique = true)
     private String email;
     private Boolean buildIn;
@@ -51,9 +62,11 @@ public class User {
     private Long advisorTeacherId;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
     @OneToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserRole userRole;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE) // One user can be related to many studentsinfo
     private List<StudentInfo> studentInfos;
 
@@ -63,12 +76,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_program_id")
     )
-    private Set<LessonProgram> lessonProgramSet;
+    private Set<LessonProgram> lessonProgramList;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "studentList")
     private List<Meet> meetList;
 
-}
+    }
+
+
 
 
