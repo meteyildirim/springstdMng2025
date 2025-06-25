@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AbstractUserRequest {
+public abstract class AbstractUserRequest {
 
     @NotNull(message = "Please enter username")
     @Size(min=4, max=16, message="Your username should be 4 chars")
