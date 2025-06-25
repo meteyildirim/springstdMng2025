@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -67,7 +66,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE) // One user can be related to many studentsinfo
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE) // one teacher has many students.
     private List<StudentInfo> studentInfos;
 
     @ManyToMany
