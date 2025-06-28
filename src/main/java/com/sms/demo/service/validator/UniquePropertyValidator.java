@@ -10,7 +10,11 @@ public class UniquePropertyValidator {
 
     private final UserRepository userRepository;
 
-    public void checkDuplication( String username, String ssn, String phone, String email){
-        
+    public void checkDuplication(
+            String username,
+            String ssn,
+            String phone,
+            String email){
+
     }
 }

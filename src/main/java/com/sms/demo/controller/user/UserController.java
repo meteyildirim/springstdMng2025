@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/save/{userRole}")
-    public ResponseEntity<ResponseMessage<UserResponse>> saveUSer(
+    public ResponseEntity<ResponseMessage<UserResponse>> saveUser(
             @RequestBody @Valid UserRequest userRequest,
             // path deki userRole kullanir ve asagidaki userRole atar
             @PathVariable String userRole) {
